@@ -1,11 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SubNavigation from '../SubNavigation/SubNavigation';
-import Cast from '../../views/Cast';
-import Reviews from '../../views/Reviews';
+import Loader from '../Loader/Loader';
 import routes from '../../routes';
 import apiService from '../../services-api/apiService';
 import styles from '../../styles/Movies.module.css';
+
+const Cast = lazy(() =>
+  import('../../views/Cast' /* webpackChunkName: "Cast" */),
+);
+const Reviews = lazy(() =>
+  import('../../views/Reviews' /* webpackChunkName: "Reviews" */),
+);
 
 class MovieDetails extends Component {
   handleGoBack = () => {
@@ -64,8 +70,10 @@ class MovieDetails extends Component {
               <SubNavigation routeProps={routeProps} />
               <hr />
               <Switch>
-                <Route path={routes.cast} component={Cast} />
-                <Route path={routes.reviews} component={Reviews} />
+                <Suspense fallback={<Loader />}>
+                  <Route path={routes.cast} component={Cast} />
+                  <Route path={routes.reviews} component={Reviews} />
+                </Suspense>
               </Switch>
             </div>
           </div>
