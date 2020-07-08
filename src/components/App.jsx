@@ -19,15 +19,14 @@ const MovieDetailsPage = lazy(() =>
 function App() {
   return (
     <Layout>
-      <Switch>
-        <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
+        <Switch>
           <Route path={routes.home} exact component={Home} />
           <Route path={routes.movies} exact component={Movies} />
           <Route path={routes.moviesDetailsPage} component={MovieDetailsPage} />
-          {/* <Redirect to="/" /> */}
-        </Suspense>
-        <Redirect to="/" />
-      </Switch>
+          <Redirect to="/" />
+        </Switch>
+      </Suspense>
     </Layout>
   );
 }
