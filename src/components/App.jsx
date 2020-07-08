@@ -26,6 +26,7 @@ function App() {
           <Route path={routes.moviesDetailsPage} component={MovieDetailsPage} />
           {/* <Redirect to="/" /> */}
         </Suspense>
+        <Redirect to="/" />
       </Switch>
     </Layout>
   );
